@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Runtime.Serialization;
 using System.Text;
+using System.Xml;
+using System.Xml.Schema;
+using System.Xml.Serialization;
 
 namespace CryBlendSpace.Model
 {
-    public class Dimensions : BaseDataItem, ISerializable
+    public class Dimensions : BaseDataItem, IXmlSerializable
     {
         private ObservableCollection<Param> _params;
 
@@ -26,14 +28,32 @@ namespace CryBlendSpace.Model
             _params = new ObservableCollection<Param>();
         }
 
-        protected Dimensions(SerializationInfo info, StreamingContext context)
+        public XmlSchema GetSchema()
         {
-
+            return null;
         }
 
-        public void GetObjectData(SerializationInfo info, StreamingContext context)
+        public void ReadXml(XmlReader reader)
         {
-            throw new NotImplementedException();
+            reader.MoveToContent();
+
+            reader.Read();
+            while (reader.NodeType == XmlNodeType.Element)
+            {
+                //Create param from node and add to list
+                var param = new Param();
+                param.ReadXml(reader);
+                _params.Add(param);
+            }
+        }
+
+        public void WriteXml(XmlWriter writer)
+        {
+            //Serialize all the params
+            foreach (var param in Params)
+            {
+                param.WriteXml(writer);
+            }
         }
     }
 }
