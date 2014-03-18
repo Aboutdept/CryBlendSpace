@@ -61,6 +61,8 @@ namespace CryBlendSpace.ViewModel
         public MainViewModel(IDataService dataService)
         {
             _dataService = dataService;
+            ParaGroup pg = _dataService.OpenBspace(@"C:\Users\nicholasd\Documents\GitHub\CryBlendSpace\TestFolder\Simple.bspace");
+            _dataService.Save(pg);
         }
 
         ////public override void Cleanup()

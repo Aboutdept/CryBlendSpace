@@ -7,6 +7,9 @@ namespace CryBlendSpace.Model
 {
     public interface IDataService
     {
+        ParaGroup OpenBspace(String file);
+        ParaGroup CreateBspace();
 
+        void Save(ParaGroup paraGroup);
     }
 }

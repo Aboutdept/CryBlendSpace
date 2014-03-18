@@ -187,6 +187,69 @@ namespace CryBlendSpace.Model
 
             #endregion
 
+            #region Scale
+
+            if(!String.IsNullOrWhiteSpace(reader.GetAttribute("scale")))
+            {
+                Scale = Single.Parse(reader.GetAttribute("scale"));
+            }
+
+            #endregion
+
+            #region JointName
+
+            if (!String.IsNullOrWhiteSpace(reader.GetAttribute("JointName")))
+            {
+                JointName = reader.GetAttribute("JointName");
+            }
+
+            #endregion
+
+            #region SKey
+
+            if (!String.IsNullOrWhiteSpace(reader.GetAttribute("skey")))
+            {
+                SKey = Single.Parse(reader.GetAttribute("skey"));
+            }
+
+            #endregion
+
+            #region EKey
+
+            if (!String.IsNullOrWhiteSpace(reader.GetAttribute("ekey")))
+            {
+                EKey = Single.Parse(reader.GetAttribute("ekey"));
+            }
+
+            #endregion
+
+            #region Locked
+
+            if (!String.IsNullOrWhiteSpace(reader.GetAttribute("locked")))
+            {
+                Locked = reader.GetAttribute("locked") == "1" ? true : false;
+            }
+
+            #endregion
+
+            #region DeltaExtraction
+
+            if (!String.IsNullOrWhiteSpace(reader.GetAttribute("deltaextraction")))
+            {
+                DeltaExtraction = reader.GetAttribute("deltaextraction") == "1" ? true : false;
+            }
+
+            #endregion
+
+            #region ChooseBlendSpace
+
+            if (!String.IsNullOrWhiteSpace(reader.GetAttribute("ChooseBlendSpace")))
+            {
+                ChooseBlendSpace = reader.GetAttribute("ChooseBlendSpace") == "1" ? true : false;
+            }
+
+            #endregion
+
         }
 
         public void WriteXml(XmlWriter writer)

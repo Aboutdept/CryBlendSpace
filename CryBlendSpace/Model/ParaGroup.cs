@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Xml;
@@ -10,7 +11,16 @@ namespace CryBlendSpace.Model
 {
     public class ParaGroup : BaseDataItem, IXmlSerializable
     {
-        private Dimensions _dimensions;
+        #region Fields
+
+        private String _filename;
+        private String _fullPath;
+
+        private Dimensions _dimensions; 
+
+        #endregion
+
+        #region Properties
 
         public Dimensions Dimensions
         {
@@ -21,6 +31,50 @@ namespace CryBlendSpace.Model
                 RaisePropertyChanged("Dimensions");
             }
         }
+
+        public String Filename
+        {
+            get { return _filename; }
+            private set
+            {
+                _filename = value;
+                RaisePropertyChanged("Filename");
+            }
+        }
+
+        public String FullPath
+        {
+            get { return _fullPath; }
+            private set
+            {
+                _fullPath = value;
+                RaisePropertyChanged("FullPath");
+            }
+        } 
+
+        #endregion
+
+        #region Constructor
+
+        public ParaGroup()
+        {
+
+        }
+
+        #endregion
+
+        #region Methods
+
+        public void SetFilePath(String filepath)
+        {
+            Filename = Path.GetFileName(filepath);
+            FullPath = filepath;
+        }
+
+
+        #endregion
+
+        #region IXmlSerializable
 
         public XmlSchema GetSchema()
         {
@@ -50,6 +104,8 @@ namespace CryBlendSpace.Model
             //Serialize dimensions
             XmlSerializer other = new XmlSerializer(typeof(Dimensions));
             other.Serialize(writer, Dimensions);
-        }
+        } 
+
+        #endregion
     }
 }

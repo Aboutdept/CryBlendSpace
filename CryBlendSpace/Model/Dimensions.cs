@@ -44,6 +44,7 @@ namespace CryBlendSpace.Model
                 var param = new Param();
                 param.ReadXml(reader);
                 _params.Add(param);
+                reader.Read();
             }
         }
 
