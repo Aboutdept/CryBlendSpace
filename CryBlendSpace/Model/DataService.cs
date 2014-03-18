@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Xml;
 using System.Xml.Serialization;
 
 namespace CryBlendSpace.Model
@@ -12,7 +13,11 @@ namespace CryBlendSpace.Model
             ParaGroup val;
             using (FileStream fs = new FileStream(file, FileMode.Open))
             {
-                val = (ParaGroup)xs.Deserialize(fs);
+                XmlReaderSettings xsettings = new XmlReaderSettings();
+                xsettings.ConformanceLevel = ConformanceLevel.Fragment;
+
+                XmlReader xRead = XmlReader.Create(fs, xsettings);
+                val = (ParaGroup)xs.Deserialize(xRead);
                 val.SetFilePath(file);
             }
             return val;
@@ -28,7 +33,17 @@ namespace CryBlendSpace.Model
             //Save to file path
             XmlSerializer xs = new XmlSerializer(typeof(ParaGroup));
             StreamWriter sw = new StreamWriter(paraGroup.FullPath, false);
-            xs.Serialize(sw, paraGroup);
+
+            XmlSerializerNamespaces nmsp = new XmlSerializerNamespaces();
+            nmsp.Add("","");
+
+            XmlWriterSettings xsettings = new XmlWriterSettings();
+            xsettings.OmitXmlDeclaration = true;
+            xsettings.Indent = true;
+
+            XmlWriter xWrite = XmlWriter.Create(sw, xsettings);
+
+            xs.Serialize(xWrite, paraGroup, nmsp);
             sw.Close();
         }
     }

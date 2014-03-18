@@ -189,9 +189,9 @@ namespace CryBlendSpace.Model
 
             #region Scale
 
-            if(!String.IsNullOrWhiteSpace(reader.GetAttribute("scale")))
+            if(!String.IsNullOrWhiteSpace(reader.GetAttribute("ParaScale")))
             {
-                Scale = Single.Parse(reader.GetAttribute("scale"));
+                Scale = Single.Parse(reader.GetAttribute("ParaScale"));
             }
 
             #endregion
@@ -254,6 +254,7 @@ namespace CryBlendSpace.Model
 
         public void WriteXml(XmlWriter writer)
         {
+            writer.WriteStartElement("Param");
             //Write all properties
             writer.WriteAttributeString("name", Name);
 
@@ -281,7 +282,7 @@ namespace CryBlendSpace.Model
 
             if (Scale.HasValue)
             {
-                writer.WriteAttributeString("scale", Scale.Value.ToString("F1"));
+                writer.WriteAttributeString("ParaScale", Scale.Value.ToString("F1"));
             }
 
             #endregion
@@ -339,6 +340,8 @@ namespace CryBlendSpace.Model
             }
 
             #endregion
+
+            writer.WriteEndElement();
 
         }
 

@@ -16,7 +16,8 @@ namespace CryBlendSpace.Model
         private String _filename;
         private String _fullPath;
 
-        private Dimensions _dimensions; 
+        private Dimensions _dimensions;
+        private ExampleList _exampleList;
 
         #endregion
 
@@ -29,6 +30,16 @@ namespace CryBlendSpace.Model
             {
                 _dimensions = value;
                 RaisePropertyChanged("Dimensions");
+            }
+        }
+
+        public ExampleList ExampleList
+        {
+            get { return _exampleList; }
+            set
+            {
+                _exampleList = value;
+                RaisePropertyChanged("ExampleList");
             }
         }
 
@@ -93,6 +104,11 @@ namespace CryBlendSpace.Model
                         Dimensions = new Dimensions();
                         Dimensions.ReadXml(reader);
                     }
+                    if (reader.LocalName == "ExampleList")
+                    {
+                        ExampleList = new ExampleList();
+                        ExampleList.ReadXml(reader);
+                    }
                     //other node types
                 }
             }
@@ -102,8 +118,8 @@ namespace CryBlendSpace.Model
         {
             //Write the child nodes
             //Serialize dimensions
-            XmlSerializer other = new XmlSerializer(typeof(Dimensions));
-            other.Serialize(writer, Dimensions);
+            Dimensions.WriteXml(writer);
+            ExampleList.WriteXml(writer);
         } 
 
         #endregion

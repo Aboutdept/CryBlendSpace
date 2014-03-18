@@ -37,24 +37,32 @@ namespace CryBlendSpace.Model
         {
             reader.MoveToContent();
 
-            reader.Read();
-            while (reader.NodeType == XmlNodeType.Element)
+            do
             {
+                if (reader.NodeType == XmlNodeType.EndElement)
+                {
+                    break;
+                }
+
                 //Create param from node and add to list
-                var param = new Param();
-                param.ReadXml(reader);
-                _params.Add(param);
-                reader.Read();
-            }
+                if (reader.NodeType == XmlNodeType.Element && reader.LocalName == "Param")
+                {
+                    var param = new Param();
+                    param.ReadXml(reader);
+                    _params.Add(param);
+                } 
+            } while (reader.Read());
         }
 
         public void WriteXml(XmlWriter writer)
         {
+            writer.WriteStartElement("Dimensions");
             //Serialize all the params
             foreach (var param in Params)
             {
                 param.WriteXml(writer);
             }
+            writer.WriteEndElement();
         }
     }
 }

@@ -72,6 +72,8 @@
     <Compile Include="Model\BaseDataItem.cs" />
     <Compile Include="Model\DataService.cs" />
     <Compile Include="Model\Dimensions.cs" />
+    <Compile Include="Model\Example.cs" />
+    <Compile Include="Model\ExampleList.cs" />
     <Compile Include="Model\IDataService.cs" />
     <Compile Include="Model\ParaGroup.cs" />
     <Compile Include="Model\Param.cs" />
