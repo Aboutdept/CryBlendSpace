@@ -18,6 +18,8 @@ namespace CryBlendSpace.Model
 
         private Dimensions _dimensions;
         private ExampleList _exampleList;
+        private Blendable _blendable;
+        private MotionCombination _motionCombination;
 
         #endregion
 
@@ -40,6 +42,26 @@ namespace CryBlendSpace.Model
             {
                 _exampleList = value;
                 RaisePropertyChanged("ExampleList");
+            }
+        }
+
+        public Blendable Blendable
+        {
+            get { return _blendable; }
+            set
+            {
+                _blendable = value;
+                RaisePropertyChanged("Blendable");
+            }
+        }
+
+        public MotionCombination MotionCombination
+        {
+            get { return _motionCombination; }
+            set
+            {
+                _motionCombination = value;
+                RaisePropertyChanged("MotionCombination");
             }
         }
 
@@ -109,6 +131,16 @@ namespace CryBlendSpace.Model
                         ExampleList = new ExampleList();
                         ExampleList.ReadXml(reader);
                     }
+                    if (reader.LocalName == "Blendable")
+                    {
+                        Blendable = new Blendable();
+                        Blendable.ReadXml(reader);
+                    }
+                    if (reader.LocalName == "MotionCombination")
+                    {
+                        MotionCombination = new MotionCombination();
+                        MotionCombination.ReadXml(reader);
+                    }
                     //other node types
                 }
             }
@@ -120,6 +152,8 @@ namespace CryBlendSpace.Model
             //Serialize dimensions
             Dimensions.WriteXml(writer);
             ExampleList.WriteXml(writer);
+            Blendable.WriteXml(writer);
+            MotionCombination.WriteXml(writer);
         } 
 
         #endregion

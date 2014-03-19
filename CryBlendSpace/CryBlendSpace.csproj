@@ -70,11 +70,15 @@
     <Compile Include="Common\Extensions.cs" />
     <Compile Include="Common\ParamNames.cs" />
     <Compile Include="Model\BaseDataItem.cs" />
+    <Compile Include="Model\Blendable.cs" />
     <Compile Include="Model\DataService.cs" />
     <Compile Include="Model\Dimensions.cs" />
     <Compile Include="Model\Example.cs" />
     <Compile Include="Model\ExampleList.cs" />
+    <Compile Include="Model\Face.cs" />
     <Compile Include="Model\IDataService.cs" />
+    <Compile Include="Model\MotionCombination.cs" />
+    <Compile Include="Model\NewStyle.cs" />
     <Compile Include="Model\ParaGroup.cs" />
     <Compile Include="Model\Param.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
