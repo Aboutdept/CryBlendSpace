@@ -23,9 +23,11 @@ namespace CryBlendSpace.Model
             return val;
         }
 
-        public ParaGroup CreateBspace()
+        public ParaGroup CreateBspace(String file)
         {
-            throw new NotImplementedException();
+            ParaGroup pGroup = new ParaGroup();
+            pGroup.SetFilePath(file);
+            return pGroup;
         }
 
         public void Save(ParaGroup paraGroup)

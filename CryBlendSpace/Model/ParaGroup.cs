@@ -91,7 +91,10 @@ namespace CryBlendSpace.Model
 
         public ParaGroup()
         {
-
+            Dimensions = new Dimensions();
+            ExampleList = new ExampleList();
+            Blendable = new Blendable();
+            MotionCombination = new MotionCombination();
         }
 
         #endregion
